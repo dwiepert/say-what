@@ -52,23 +52,23 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_dir', default = '/Users/m144443/Documents/speech_datasets/tiny_external_speechdatabase_20240219', help='Set path to directory with wav files to process. Can be local directory or google cloud storage bucket.')
+    parser.add_argument('--input_dir', default = '', help='Set path to directory with wav files to process. Can be local directory or google cloud storage bucket.')
     parser.add_argument("--save_outputs", default=False, type=ast.literal_eval, help="Specify whether to save outputs.")
-    parser.add_argument("--output_dir", default= '/Users/m144443/Documents/speech_datasets/test_asr2', help='Set path to directory where outputs should be saved.')
+    parser.add_argument("--output_dir", default= '', help='Set path to directory where outputs should be saved.')
     #run methods
     #model specifics
-    parser.add_argument("--model_type", default='whisper', choices = ['w2v2','whisper'], help='Specify model to use.')
-    parser.add_argument("--model_size", default="medium", help='Specify model size.')
-    parser.add_argument("--checkpoint", default = '/Users/m144443/Documents/GitHub/say-what/checkpoints/medium.pt', help='Specify model checkpoint')
+    parser.add_argument("--model_type", default='w2v2', choices = ['w2v2','whisper'], help='Specify model to use.')
+    parser.add_argument("--model_size", default="base", help='Specify model size.')
+    parser.add_argument("--checkpoint", default = '', help='Specify model checkpoint')
     #transcription specifics
     parser.add_argument("--return_timestamps", default=True, type=ast.literal_eval, help= "Specify whether to get timestamps for each audio file")
     parser.add_argument("--return_pauses", default=True, type=ast.literal_eval, help="Specify whether to find long pauses.")
     parser.add_argument("--pause_s", default=0.1, type=float, help='Set threshold for a long pause in SECONDS.')
     #GCS
     parser.add_argument("--cloud",  nargs="+", type=ast.literal_eval, default=[False, False, False], help="Specify which files are located on the cloud/should be located on the cloud [input_dir, output_dir, checkpoint]")
-    parser.add_argument("--local_dir", default='speech/datasets/test_asr/', help="Specify location to save files downloaded from bucket")
-    parser.add_argument('-b','--bucket_name', default='data-ingest-quarantine', help="google cloud storage bucket name")
-    parser.add_argument('-p','--project_name', default='aif-usr-p-naip-netd-d2d1', help='google cloud platform project name')
+    parser.add_argument("--local_dir", default='', help="Specify location to save files downloaded from bucket")
+    parser.add_argument('-b','--bucket_name', default='', help="google cloud storage bucket name")
+    parser.add_argument('-p','--project_name', default='', help='google cloud platform project name')
     
     args = parser.parse_args()
 
