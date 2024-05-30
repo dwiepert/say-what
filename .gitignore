@@ -1,0 +1,8 @@
+
+/build
+.DS_Store
+/checkpoints
+/say_what.py.egg-info
+/say_what/__pycache__
+/say_what/constants/__pycache__
+*.pyc
