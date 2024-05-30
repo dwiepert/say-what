@@ -30,15 +30,15 @@ There are a handful of ways to specify and work with checkpoints
 `download_checkpoint_from_hf` takes the following parameters:
 - checkpoint: str, Path, directory where the checkpoint file(s) should be saved. Must be full file path to where to SAVE the checkpoint (e.g., `local_dir_path/checkpoint_name`). 
 - model_size: str, size of the model to download (e.g., large, small, tiny, tiny.en). This is not required if instead downloading using repo_id.
-- model_type: str, specify model type (e.g. whisper, nemo, w2v2). This is not required if instead downloading using repo_id.
+- model_type: str, specify model type (e.g. whisper, w2v2). This is not required if instead downloading using repo_id.
 - repo_id: str, repo_id in hugging face. This is used if you want to download a model that may not be available to download through specification of model size and type.
 - filename: optional filename if downloading a single file instead of directory
 - subfolder: str, optional, specify if there is a file in a subdirectory of the hugging face repo
 
 `download_checkpoint_from_url` takes the following parameters:
-- checkpoint: str, path to where checkpoint should be stored. This should be the full file path as you use this variable to specify the download target ( .pt for Whisper, .nemo for NeMo)
+- checkpoint: str, path to where checkpoint should be stored. This should be the full file path as you use this variable to specify the download target ( .pt for Whisper)
 - model_size: str, size of the model to download (e.g., large, small, tiny, tiny.en)
--  model_type: str, specify model type (e.g. whisper, nemo)
+-  model_type: str, specify model type (e.g. whisper)
 - in_memory: bool set to false
 
 `download_checkpoint_from gcs` takes the following parameters:
@@ -52,7 +52,7 @@ Note that this function requires access to GCS, which can be given with `gcloud 
 
 
 ### Models and functionality
-Three types of models are available to use: Whisper, W2V2, NeMo. Note that whisper does NOT allow non-words while W2V2 does.
+Three types of models are available to use: Whisper, W2V2. Note that whisper does NOT allow non-words while W2V2 does.
 
 All models have the following method:
 - `model.transcribe(audio: either audio path or waveform, return_timestamps: bool, return_pauses: bool, pause_s: float, threshold for long pause in seconds)`: transcribe a single audio file and optionally get timestamps and long pauses
