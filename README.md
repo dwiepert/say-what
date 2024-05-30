@@ -12,10 +12,6 @@ To intall say-what, follow the instructions below
    $ pip install .
 ```
 
-## Using WaveDataset
-### dataset_config
-### collate functions with DataLoader
-
 ## Using ASR Models
 See examples of using ASR model in [run_asr.py](https://github.com/dwiepert/say-what/blob/main/run_asr.py).
 Please note that Whisper models take a longer time to transcribe an audio file depending on the length of the file as it was originally built to only handle 30s clips.
