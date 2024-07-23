@@ -87,14 +87,18 @@ class WhisperForASR:
         segments = result["segments"]
         if segments == []:
             return []
-        timestamps = segments[0]["words"]
-        for i in range(len(timestamps)):
-            t = timestamps[i]
-            text = t['text']
-            text = text.lower().strip()
-            text = text.translate(str.maketrans('','',string.punctuation))
-            t['text'] = text
-            timestamps[i] = t
+        timestamps = {}
+        i=0
+        for s in segments:
+            ts=s['words']
+            for j in range(len(ts)):
+                t = ts[j]
+                text = t['text']
+                text = text.lower().strip()
+                text = text.translate(str.maketrans('','',string.punctuation))
+                t['text'] = text
+                timestamps[i] = t
+                i+=1
         
         return timestamps
      
@@ -141,7 +145,7 @@ class WhisperForASR:
             assert samplerate is not None, 'If giving audio as waveform, original sampling rate must also be given.'
             audio = self._check_audio(audio, samplerate)
         
-        all = whisper.transcribe(self._model, audio, language="en")
+        all = whisper.transcribe(self._model, audio, language="en", beam_size=5, best_of=5, temperature=(0.0, 0.2, 0.4, 0.6, 0.8, 1.0), vad='auditok')
         transcription = all["text"].lower().strip()
         transcription = transcription.translate(str.maketrans('','',string.punctuation))
 
@@ -156,6 +160,9 @@ class WhisperForASR:
             results['pause'] = [pauses]
         
         return results
+
+
+
 
 
 
